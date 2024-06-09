@@ -97,18 +97,19 @@
     </div>
 
     <!-- Photo Gallery -->
-    <div id="gallery" class="my-5">
-        <h2>Photo Gallery</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <img src="image1.jpg" class="img-fluid" alt="Event Image">
-            </div>
-            <div class="col-md-3">
-                <img src="image2.jpg" class="img-fluid" alt="Event Image">
-            </div>
-            <!-- Add more images as needed -->
+<div id="gallery" class="my-5">
+    <h2>Photo Gallery</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ asset('img/ka.jpg') }}" class="img-fluid" alt="Event Image">
         </div>
+        <div class="col-md-3">
+            <img src="{{ asset('img/like.jpg') }}" class="img-fluid" alt="Event Image">
+        </div>
+        <!-- Add more images as needed -->
     </div>
+</div>
+
 
     <!-- Newsletter Signup -->
     <div id="newsletter" class="my-5">

@@ -15,21 +15,21 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-         
             $table->string('title');
             $table->string('name');
-             
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('organiser');
             $table->text('description');
-            $table->integer('price'); 
-            $table->string('venue');      
+            $table->integer('price');
+            $table->string('venue');
             $table->date('date');
             $table->time('time');
             $table->string('image');
-         
+            $table->unsignedBigInteger('user_id')->default(2)->index();
             $table->timestamps();
-            $table->unsignedInteger('user_id')->index()->default(2);
+
+            // Add foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
