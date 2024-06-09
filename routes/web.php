@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::delete('/booking/{rowid}', 'BookingController@destroy')->name('booking.destroy');
 
+ 
+
     // Newsletter route
     Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
@@ -43,7 +45,7 @@ Route::get('/welcome', 'EventController@index')->name('events.index');
 Route::get('/welcome/{slug}', 'EventController@show' )->name('events.show');
 Route::get('/search', 'EventController@search' )->name('events.search');
 Route::get('/culture', 'EventController@culture' )->name('events.culture');
-//Route::get('/sport', 'EventController@sport' )->name('events.sport');
+Route::get('/sport', 'EventController@sport' )->name('events.sport');
 Route::get('/sport', [EventController::class, 'sport'])->name('events.sport');
 
 Route::get('/others', 'EventController@others' )->name('events.others');

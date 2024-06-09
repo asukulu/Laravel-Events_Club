@@ -16,7 +16,7 @@
             images[1] = '/img/ru.jpg';
             images[2] = '/img/sp.jpg';
             images[3] = '/img/1 (5).jpg';
-			images[4] = '/img/1 (7).jpg';
+			images[4] = '/img/2 (2).jpg';
 			images[4] = '/img/1 (2).jpg';
 
             // Change Image
@@ -106,7 +106,7 @@
             <img src="{{ asset('img/1 (16).jpg') }}" class="img-fluid" alt="Event Image">
         </div>
         <div class="col-md-3">
-            <img src="{{ asset('img/1 (15).jpg') }}" class="img-fluid" alt="Event Image">
+            <img src="{{ asset('img/2 (5).jpg') }}" class="img-fluid" alt="Event Image">
         </div>
 
 		<div class="col-md-3">

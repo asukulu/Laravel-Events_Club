@@ -24,9 +24,9 @@ $this->middleware('auth')->except(['index','show','search','culture','sport', 'o
         {
          
         //display events by date order and paginate
-            $events = Event::orderBy('date', 'ASC')->paginate(4);
+           $events = Event::orderBy('date', 'ASC')->paginate(4);
 
-            return view('events.index')->with('events', $events);
+            return view('events.index');
         }
     
         public function show($slug)
