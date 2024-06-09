@@ -6,6 +6,7 @@ use App\Http\Controllers\BookingController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsletterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/booking/add', 'BookingController@store')->name('booking.store');
     
     Route::delete('/booking/{rowid}', 'BookingController@destroy')->name('booking.destroy');
+
+    // Newsletter route
+    Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
 });
 
