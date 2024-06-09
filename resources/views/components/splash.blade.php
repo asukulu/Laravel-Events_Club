@@ -12,12 +12,12 @@
             var time = 4000;
 
             // Image List
-            images[0] = '/img/ka.jpg';
-            images[1] = '/img/ru.jpg';
-            images[2] = '/img/sp.jpg';
-            images[3] = '/img/1 (5).jpg';
-			images[4] = '/img/2 (2).jpg';
-			images[4] = '/img/1 (2).jpg';
+            images[0] = '{{ asset("img/ka.jpg") }}';
+            images[1] = '{{ asset("img/ru.jpg") }}';
+            images[2] = '{{ asset("img/sp.jpg") }}';
+            images[3] = '{{ asset("img/1 (5).jpg") }}';
+            images[4] = '{{ asset("img/2 (2).jpg") }}';
+            images[5] = '{{ asset("img/1 (2).jpg") }}';
 
             // Change Image
             function changeImg(){
@@ -29,7 +29,7 @@
                     i = 0;
                 }
 
-                setTimeout("changeImg()", time);
+                setTimeout(changeImg, time);
             }
 
             window.onload = changeImg;
@@ -99,26 +99,24 @@
     </div>
 
     <!-- Photo Gallery -->
-<div id="gallery" class="my-5">
-    <h2>Photo Gallery</h2>
-    <div class="row">
-        <div class="col-md-3">
-            <img src="{{ asset('img/1 (16).jpg') }}" class="img-fluid" alt="Event Image">
+    <div id="gallery" class="my-5">
+        <h2>Photo Gallery</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ asset('img/1 (16).jpg') }}" class="img-fluid" alt="Event Image">
+            </div>
+            <div class="col-md-3">
+                <img src="{{ asset('img/2 (5).jpg') }}" class="img-fluid" alt="Event Image">
+            </div>
+            <div class="col-md-3">
+                <img src="{{ asset('img/1 (14).jpg') }}" class="img-fluid" alt="Event Image">
+            </div>
+            <div class="col-md-3">
+                <img src="{{ asset('img/1 (12).jpg') }}" class="img-fluid" alt="Event Image">
+            </div>
+            <!-- Add more images as needed -->
         </div>
-        <div class="col-md-3">
-            <img src="{{ asset('img/2 (5).jpg') }}" class="img-fluid" alt="Event Image">
-        </div>
-
-		<div class="col-md-3">
-            <img src="{{ asset('img/1 (14).jpg') }}" class="img-fluid" alt="Event Image">
-        </div>
-        <div class="col-md-3">
-            <img src="{{ asset('img/1 (12).jpg') }}" class="img-fluid" alt="Event Image">
-        </div>
-        <!-- Add more images as needed -->
     </div>
-</div>
-
 
     <!-- Newsletter Signup -->
     <div id="newsletter" class="my-5">
@@ -135,7 +133,7 @@
     <!-- Contact Information -->
     <div id="contact" class="my-5">
         <h2>Contact Us</h2>
-        <p>Email: events@aston.ac.uk</p>
+        <p>Email: <a href="mailto:events@aston.ac.uk">events@aston.ac.uk</a></p>
         <p>Phone: 0121 204 3000</p>
         <p>Follow us on <a href="#">Twitter</a>, <a href="#">Facebook</a>, and <a href="#">Instagram</a>.</p>
     </div>

@@ -1,20 +1,25 @@
 <?php
-use App\Models\Event;
-//namespace Database\Seeders;
-
-
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
     public function run()
     {
-       $this->call(CategoriesTableSeeder::class);
-        $this->call(EventSeeder::class); 
+        // Only call existing seeders here
+        $this->call([
+           //UsersTableSeeder::class,
+            EventsTableSeeder::class,
+            // Add other existing seeders here if needed
+
+            
+        ]);
     }
 }
-          
-        
-    
 
