@@ -43,7 +43,9 @@ Route::get('/welcome', 'EventController@index')->name('events.index');
 Route::get('/welcome/{slug}', 'EventController@show' )->name('events.show');
 Route::get('/search', 'EventController@search' )->name('events.search');
 Route::get('/culture', 'EventController@culture' )->name('events.culture');
-Route::get('/sport', 'EventController@sport' )->name('events.sport');
+//Route::get('/sport', 'EventController@sport' )->name('events.sport');
+Route::get('/sport', [EventController::class, 'sport'])->name('events.sport');
+
 Route::get('/others', 'EventController@others' )->name('events.others');
 Route::get('/contact', 'EventController@contact' )->name('events.contact');
 

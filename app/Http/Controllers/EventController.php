@@ -95,7 +95,7 @@ public function sport()
       
 {
         $search = request();
-      
+        //$events = Event::where('category', 'sport')->get();
 
         $events = Event::where('name', 'like', "%sport%")
         ->orWhere('title', 'like', "%$search%")
@@ -104,7 +104,8 @@ public function sport()
         ->paginate(4);
         
 
-                return view('events.sport')->with('events', $events)
+                // return view('events.sport', compact('events'));
+                 return view('events.sport', compact('events'));
                
         
                 ;

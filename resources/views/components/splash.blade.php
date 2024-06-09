@@ -15,7 +15,9 @@
             images[0] = '/img/ka.jpg';
             images[1] = '/img/ru.jpg';
             images[2] = '/img/sp.jpg';
-            images[3] = '/img/swi.jpg';
+            images[3] = '/img/1 (5).jpg';
+			images[4] = '/img/1 (7).jpg';
+			images[4] = '/img/1 (2).jpg';
 
             // Change Image
             function changeImg(){
@@ -101,10 +103,17 @@
     <h2>Photo Gallery</h2>
     <div class="row">
         <div class="col-md-3">
-            <img src="{{ asset('img/ka.jpg') }}" class="img-fluid" alt="Event Image">
+            <img src="{{ asset('img/1 (16).jpg') }}" class="img-fluid" alt="Event Image">
         </div>
         <div class="col-md-3">
-            <img src="{{ asset('img/like.jpg') }}" class="img-fluid" alt="Event Image">
+            <img src="{{ asset('img/1 (15).jpg') }}" class="img-fluid" alt="Event Image">
+        </div>
+
+		<div class="col-md-3">
+            <img src="{{ asset('img/1 (14).jpg') }}" class="img-fluid" alt="Event Image">
+        </div>
+        <div class="col-md-3">
+            <img src="{{ asset('img/1 (12).jpg') }}" class="img-fluid" alt="Event Image">
         </div>
         <!-- Add more images as needed -->
     </div>
