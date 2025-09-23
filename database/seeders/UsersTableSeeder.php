@@ -10,14 +10,29 @@ class UsersTableSeeder extends Seeder
 {
     public function run()
     {
+        // Reset table
+        DB::table('users')->delete();
+
+
         DB::table('users')->insert([
-            'id' => 1,
-            'name' => 'Admin User',
-            'email' => '2626262626@aston.ac.uk',
-            'password' => Hash::make('password123'), // Hash the password correctly
-            'tel' => '1234567890', // Ensure 'tel' is correctly assigned
-            'created_at' => now(),
-            'updated_at' => now(),
+            [
+                'id' => 1,
+                'name' => 'Admin User',
+                'email' => '2222222222@aston.ac.uk',
+                'password' => Hash::make('password123'),
+                'tel' => '1234567890', // unique
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 2,
+                'name' => 'Second Admin',
+                'email' => '2222222221@aston.ac.uk',
+                'password' => Hash::make('password123'),
+                'tel' => '0987654321', // different number
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

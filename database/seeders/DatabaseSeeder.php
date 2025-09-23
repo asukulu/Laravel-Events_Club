@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\UsersTableSeeder;  // <-- import if exists
+use Database\Seeders\EventsTableSeeder; // <-- import
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,12 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Only call existing seeders here
         $this->call([
             UsersTableSeeder::class,
             EventsTableSeeder::class,
-            // Add other existing seeders here if needed
         ]);
     }
 }
-
