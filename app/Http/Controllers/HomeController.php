@@ -24,7 +24,8 @@ class HomeController extends Controller
      */
    public function index()
 {
-    $events = Event::latest()->take(6)->get(); // Fetch latest 6 events
+    //$events = Event::latest()->take(6)->get(); // Fetch latest 6 events
+    $events = Event::latest()->paginate(6); // paginate instead of take
     return view('components.splash', compact('events')); // Pass events to splash view
 }
 }

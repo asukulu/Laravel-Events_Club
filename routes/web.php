@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/booking/add', [BookingController::class, 'store'])->name('booking.store');
     Route::delete('/booking/{rowid}', [BookingController::class, 'destroy'])->name('booking.destroy');
     Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 // Events routes

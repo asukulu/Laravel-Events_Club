@@ -38,7 +38,7 @@
                                     <img src="{{ asset('img/ny.jpg') }}" alt="New York" width="1100" height="500">
                                 </div>
                             </div>
-                            
+                        
                             <!-- Left and right controls -->
                             <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
                                 <span class="carousel-control-prev-icon"></span>
