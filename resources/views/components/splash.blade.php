@@ -37,9 +37,11 @@
     </div>
 
     <!-- Upcoming Events -->
-    <div id="upcoming-events" class="my-5">
-        <h2>Upcoming Events</h2>
-        <div class="row">
+   
+<div id="upcoming-events" class="my-5">
+    <h2>Upcoming Events</h2>
+    <div class="row">
+        @if(isset($events) && $events->count())
             @foreach ($events as $event)
                 <div class="col-md-4 mb-4">
                     <div class="card">
@@ -52,8 +54,19 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+
+            <!-- Add pagination controls -->
+            <div class="col-12 mt-4">
+                {{ $events->links() }}
+            </div>
+        @else
+            <div class="col-12">
+                <p class="text-muted">No upcoming events available right now. Please check back later.</p>
+            </div>
+        @endif
     </div>
+</div>
+
 
     <!-- About Us -->
     <div id="about-us" class="my-5">

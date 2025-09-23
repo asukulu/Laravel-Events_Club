@@ -42,3 +42,4 @@ Route::get('/contact', [EventController::class, 'contact'])->name('events.contac
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [EventController::class, 'index']);

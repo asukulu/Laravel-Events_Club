@@ -9,7 +9,11 @@ class MainController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
-        return view('components.splash', compact('events'));
+        // Fetch upcoming events ordered by date, paginated
+        $events = Event::orderBy('date', 'ASC')->paginate(4);
+  // Pass events to splash.blade.php
+        return view('splash', compact('events'));
     }
 }
+
+

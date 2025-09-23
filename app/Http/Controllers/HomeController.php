@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class HomeController extends Controller
 {
@@ -21,8 +22,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('welcome');
-    }
+   public function index()
+{
+    $events = Event::latest()->take(6)->get(); // Fetch latest 6 events
+    return view('components.splash', compact('events')); // Pass events to splash view
+}
 }

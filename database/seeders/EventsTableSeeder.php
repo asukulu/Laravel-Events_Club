@@ -4,18 +4,14 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-<<<<<<< HEAD
-=======
-use Illuminate\Support\Str;
->>>>>>> 7a453576495fb2612f5a66caee7e7befe9f4c26d
+
 
 class EventsTableSeeder extends Seeder
 {
     public function run()
     {
         DB::table('events')->insert([
-            [
-<<<<<<< HEAD
+
                 'created_at' => now(),
                 'date' => '2024-06-15',
                 'description' => 'A day full of sports activities and competitions.',
@@ -78,22 +74,6 @@ class EventsTableSeeder extends Seeder
                 'updated_at' => now(),
                 'user_id' => 1, // Ensure this ID exists in users table
                 'venue' => 'University Stadium',
-            ],
-
-=======
-                'title' => 'University Sports Day',
-                'name' => 'Sports Day',
-                'slug' => 'university-sports-day',
-                'organiser' => 'Student Union',
-                'description' => 'A day full of sports activities and competitions.',
-                'price' => 0,
-                'venue' => 'Main Campus Field',
-                'date' => '2024-06-15',
-                'time' => '09:00:00',
-                'image' => '/img/1 (8).jpg',
-                'user_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'title' => 'Annual Football Match',
@@ -170,7 +150,7 @@ class EventsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
->>>>>>> 7a453576495fb2612f5a66caee7e7befe9f4c26d
+
             [
                 'title' => 'Science Fair',
                 'name' => 'Others/Science Fair',
@@ -182,7 +162,6 @@ class EventsTableSeeder extends Seeder
                 'date' => '2024-12-01',
                 'time' => '10:00:00',
                 'image' => '/img/2 (3).jpg',
-<<<<<<< HEAD
                 'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -192,11 +171,8 @@ class EventsTableSeeder extends Seeder
 
             
             // Add more events as needed...
-=======
-                'user_id' => 4,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+
+       
             [
                 'title' => 'Charity Marathon',
                 'name' => 'Sport/ Marathon',
@@ -205,13 +181,7 @@ class EventsTableSeeder extends Seeder
                 'description' => 'Run for a cause and raise funds for charity.',
                 'price' => 20,
                 'venue' => 'City Park',
-                'date' => '2024-12-20',
-                'time' => '07:00:00',
-                'image' => '/img/1 (11).jpg',
-                'user_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            // Add more events as needed...
             [
                 'title' => 'Tech Symposium',
                 'name' => 'Others/ Symposium',
@@ -242,7 +212,7 @@ class EventsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
->>>>>>> 7a453576495fb2612f5a66caee7e7befe9f4c26d
+
         ]);
     }
 }
