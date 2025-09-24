@@ -38,7 +38,7 @@ DB_PASSWORD=
 Launch XAMPP Control Panel
 Start Apache and MySQL services
 Click on "Admin" next to MySQL to open phpMyAdmin in your browser
-Create a new database named "littleseed" if it doesn't exist
+Create a new database named "laravel" if it doesn't exist
 
 
 ### 7. Run database migrations
