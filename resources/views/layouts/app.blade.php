@@ -153,6 +153,7 @@ body {
     .blog-pagination {
     margin-bottom: 4rem;
     }
+    
    /*  .blog-pagination > .btn {
     border-radius: 2rem;
     }
