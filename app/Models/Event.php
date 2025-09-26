@@ -10,28 +10,35 @@ class Event extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description', 
+        'name',
+        'image',
+        'slug',
+        'user_id',
+        'organiser',
+        'venue', 
+        'price',
+        'date',
+        'time',
+    ];
+
     public function getPrice()
     {
         //format of the price
-    $price = $this->price / 100;
+        $price = $this->price / 100;
+        return number_format($price, 2, '.', ' ');
+    }
 
-    return number_format($price ,  2 ,'.' .' ');
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Event');
+    }
+
+    public function user()
+    {
+        //this is the relationship of user belongs to an event 
+        return $this->belongsToMany(User::class);
+    }
 }
-
-public function categories()
-
-{
-return $this->belongsToMany('App\Models\Event');
-
-}
-
-protected $fillable = 
-['title','description','name','image','slug','user_id'];
-
-public function user()
-{
-    //this is the relationship of user belongs to an event 
-    return $this->belongsToMany(User::class);
-}
-}
-

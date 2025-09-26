@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEventsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
@@ -18,8 +13,8 @@ class CreateEventsTable extends Migration
             $table->string('title');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('organiser');
-            $table->text('description');
+            $table->string('organiser')->nullable();
+            $table->text('description')->nullable();
             $table->integer('price');
             $table->string('venue');
             $table->date('date');
@@ -29,16 +24,10 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('user_id')->default(2)->index();
             $table->timestamps();
 
-            // Add foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('events');

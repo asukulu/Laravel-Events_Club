@@ -23,7 +23,6 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Image</th> {{-- NEW COLUMN --}}
                 <th>Title</th>
                 <th>Name</th>
                 <th>Date</th>
@@ -37,16 +36,6 @@
             @forelse($events as $event)
                 <tr>
                     <td>{{ $event->id }}</td>
-
-                    {{-- Image Column --}}
-                    <td>
-                        @if($event->image)
-                            <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" width="80">
-                        @else
-                            N/A
-                        @endif
-                    </td>
-
                     <td>{{ $event->title }}</td>
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->date ?? 'N/A' }}</td>
@@ -78,7 +67,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="9">No events found.</td>
+                    <td colspan="8">No events found.</td>
                 </tr>
             @endforelse
         </tbody>

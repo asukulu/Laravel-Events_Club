@@ -21,7 +21,8 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 
 // Public routes
 Route::get('/', [EventController::class, 'index'])->name('welcome');
-Route::get('/welcome', [EventController::class, 'index'])->name('events.index');
+//Route::get('/welcome', [EventController::class, 'index'])->name('events.index');
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/welcome/{slug}', [EventController::class, 'show'])->name('events.show');
 Route::get('/search', [EventController::class, 'search'])->name('events.search');
 Route::get('/culture', [EventController::class, 'culture'])->name('events.culture');
@@ -50,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('events', EventController::class)->except(['index', 'show']);
 });
 
+//Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+   // Route::resource('events', AdminEventController::class);
+//});
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('events', AdminEventController::class);
+    Route::resource('events', App\Http\Controllers\Admin\EventController::class);
 });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -33,6 +35,7 @@ class EventController extends Controller
         $validatedData = $request->validate([
             'title'       => 'required|string|max:255',
             'name'        => 'required|string|max:255',
+            'slug'        => 'nullable|string|max:255|unique:events,slug',
             'date'        => 'required|date',
             'time'        => 'required',
             'organiser'   => 'required|string|max:255',
@@ -42,6 +45,11 @@ class EventController extends Controller
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
+        // Auto-generate slug if not provided
+        if (empty($validatedData['slug'])) {
+            $validatedData['slug'] = Str::slug($validatedData['title']);
+        }
+
         // Handle image upload
         if ($request->hasFile('image')) {
             $validatedData['image'] = $request->file('image')->store('events', 'public');
@@ -50,7 +58,7 @@ class EventController extends Controller
         Event::create($validatedData);
 
         return redirect()->route('admin.events.index')
-                        ->with('success', 'Event created successfully.');
+                         ->with('success', 'Event created successfully.');
     }
 
     /**
@@ -77,6 +85,7 @@ class EventController extends Controller
         $validatedData = $request->validate([
             'title'       => 'required|string|max:255',
             'name'        => 'required|string|max:255',
+            'slug'        => 'nullable|string|max:255|unique:events,slug,' . $event->id,
             'date'        => 'required|date',
             'time'        => 'required',
             'organiser'   => 'required|string|max:255',
@@ -86,15 +95,25 @@ class EventController extends Controller
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
-        // Handle image upload (replace old image if new one uploaded)
+        // Auto-generate slug if not provided
+        if (empty($validatedData['slug'])) {
+            $validatedData['slug'] = Str::slug($validatedData['title']);
+        }
+
+        // Handle image upload
         if ($request->hasFile('image')) {
+            // Delete old image from storage
+            if ($event->image && Storage::disk('public')->exists($event->image)) {
+                Storage::disk('public')->delete($event->image);
+            }
+
             $validatedData['image'] = $request->file('image')->store('events', 'public');
         }
 
         $event->update($validatedData);
 
         return redirect()->route('admin.events.index')
-                        ->with('success', 'Event updated successfully.');
+                         ->with('success', 'Event updated successfully.');
     }
 
     /**
@@ -102,9 +121,14 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        // Delete image from storage
+        if ($event->image && Storage::disk('public')->exists($event->image)) {
+            Storage::disk('public')->delete($event->image);
+        }
+
         $event->delete();
 
         return redirect()->route('admin.events.index')
-                        ->with('success', 'Event deleted successfully.');
+                         ->with('success', 'Event deleted successfully.');
     }
 }
