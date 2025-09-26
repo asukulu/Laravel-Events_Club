@@ -3,8 +3,10 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,20 +19,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Home route
-Route::get('/', [MainController::class, 'index'])->name('welcome');
-Route::get('/home', [MainController::class, 'index'])->name('home');
-
-// Booking routes
-Route::group(['middleware' => ['auth']], function() {
-    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
-    Route::post('/booking/add', [BookingController::class, 'store'])->name('booking.store');
-    Route::delete('/booking/{rowid}', [BookingController::class, 'destroy'])->name('booking.destroy');
-    Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-});
-
-// Events routes
+// Public routes
+Route::get('/', [EventController::class, 'index'])->name('welcome');
 Route::get('/welcome', [EventController::class, 'index'])->name('events.index');
 Route::get('/welcome/{slug}', [EventController::class, 'show'])->name('events.show');
 Route::get('/search', [EventController::class, 'search'])->name('events.search');
@@ -39,8 +29,27 @@ Route::get('/sport', [EventController::class, 'sport'])->name('events.sport');
 Route::get('/others', [EventController::class, 'others'])->name('events.others');
 Route::get('/contact', [EventController::class, 'contact'])->name('events.contact');
 
+// Newsletter subscription (can be public or authenticated based on your needs)
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
 // Authentication routes
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [EventController::class, 'index']);
+// Authenticated user routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    
+    // Booking routes
+    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+    Route::post('/booking/add', [BookingController::class, 'store'])->name('booking.store');
+    Route::delete('/booking/{rowid}', [BookingController::class, 'destroy'])->name('booking.destroy');
+});
+
+// Event management routes (authenticated users can manage events)
+Route::middleware(['auth'])->group(function () {
+    Route::resource('events', EventController::class)->except(['index', 'show']);
+});
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('events', AdminEventController::class);
+});

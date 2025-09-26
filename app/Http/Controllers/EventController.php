@@ -30,16 +30,16 @@ $this->middleware('auth')->except(['index','show','search','culture','sport', 'o
     return view('events.index', compact('events'));
 }
 
-    
+    // Show a specific event
         public function show($slug)
         {
-           //
+           
             $event = Event::where('slug', $slug)->firstOrFail();
     
             return view('events.show')->with('event', $event);
     
         }
-
+// Search function
         public function search()
         {
 request()->validate([
@@ -60,7 +60,7 @@ request()->validate([
                 ->paginate(4);
                 
 
-                return view('events.search')->with('events', $events)
+                return view('events.search', compact('events'));
                
         
                 ;
@@ -68,92 +68,116 @@ request()->validate([
     }
 
 
-
+// Culture
 public function culture()
-  
-      
 {
-        $search = request();
-      
+    $search = request()->input('search', '');
 
-        $events = Event::where('name', 'like', "%culture%")
+    $events = Event::where('name', 'like', "%culture%")
         ->orWhere('title', 'like', "%$search%")
         ->orWhere('organiser', 'like', "%$search%")
         ->orWhere('description', 'like', "%$search%")
         ->paginate(4);
-        
-                
 
-                return view('events.culture')->with('events', $events)
-               
-        
-                ;
-    }
-    
+    return view('events.culture', compact('events'));
+}
 
-    
 public function sport()
-  
-      
 {
-        $search = request();
-        //$events = Event::where('category', 'sport')->get();
+    $search = request()->input('search', '');
 
-        $events = Event::where('name', 'like', "%sport%")
+    $events = Event::where('name', 'like', "%sport%")
         ->orWhere('title', 'like', "%$search%")
         ->orWhere('organiser', 'like', "%$search%")
         ->orWhere('description', 'like', "%$search%")
         ->paginate(4);
-        
 
-                // return view('events.sport', compact('events'));
-                 return view('events.sport', compact('events'));
-               
+    return view('events.sport', compact('events'));
+}
+
+// Others
+   public function others()
+{
+    $search = request()->input('search', '');
+
+    $events = Event::where('name', 'like', "%others%")
+        ->orWhere('title', 'like', "%$search%")
+        ->orWhere('organiser', 'like', "%$search%")
+        ->orWhere('description', 'like', "%$search%")
+        ->paginate(4);
+
+    return view('events.others', compact('events'));
+}
+
+    
+// Contact page
+   public function contact()
+{
+    $search = request()->input('search', '');
+
+    $events = Event::where('name', 'like', "%contact%")
+        ->orWhere('title', 'like', "%$search%")
+        ->orWhere('organiser', 'like', "%$search%")
+        ->orWhere('description', 'like', "%$search%")
+        ->paginate(4);
+
+    return view('events.contact', compact('events'));
+}
+
         
-                ;
+    // Show the form for creating a new resource.
+
+        public function create()
+{
+    return view('events.create');
+}
+
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'date' => 'required|date',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $validated['image'] = $request->file('image')->store('events', 'public');
     }
 
+    Event::create($validated);
 
-    public function others()
-  
-      
-    {
-            $search = request();
-          
-    
-            $events = Event::where('name', 'like', "%others%")
-            ->orWhere('title', 'like', "%$search%")
-            ->orWhere('organiser', 'like', "%$search%")
-            ->orWhere('description', 'like', "%$search%")
-            ->paginate(4);
-            
-    
-                    return view('events.others')->with('events', $events)
-                   
-            
-                    ;
-        }
-    
-    
+    return redirect()->route('events.index')->with('success', 'Event created successfully!');
+}
 
-    public function contact()
-  
-      
-    {
-            $search = request();
-          
-    
-            $events = Event::where('name', 'like', "%contact%")
-            ->orWhere('title', 'like', "%$search%")
-            ->orWhere('organiser', 'like', "%$search%")
-            ->orWhere('description', 'like', "%$search%")
-            ->paginate(4);
-            
-    
-                    return view('events.contact')->with('events', $events)
-                   
-            
-                    ;
-        }
-    
+public function edit(Event $event)
+{
+    return view('events.edit', compact('event'));
+}
+
+public function update(Request $request, Event $event)
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'date' => 'required|date',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $validated['image'] = $request->file('image')->store('events', 'public');
+    }
+
+    $event->update($validated);
+
+    return redirect()->route('events.index')->with('success', 'Event updated successfully!');
+}
+
+public function destroy(Event $event)
+{
+    $event->delete();
+
+    return redirect()->route('events.index')->with('success', 'Event deleted successfully!');
+}
+
 }

@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Admin User',
-                'email' => '2222222222@aston.ac.uk',
+                'email' => '2222222223@aston.ac.uk',
                 'password' => Hash::make('password123'),
                 'tel' => '1234567890', // unique
                 'created_at' => now(),

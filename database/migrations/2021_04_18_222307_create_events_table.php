@@ -24,7 +24,8 @@ class CreateEventsTable extends Migration
             $table->string('venue');
             $table->date('date');
             $table->time('time');
-            $table->string('image');
+            $table->string('image')->nullable();
+
             $table->unsignedBigInteger('user_id')->default(2)->index();
             $table->timestamps();
 

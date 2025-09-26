@@ -53,8 +53,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Booking');
     }
 
-public function events()
+    public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin === true;
     }
 }
