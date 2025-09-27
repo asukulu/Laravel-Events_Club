@@ -56,10 +56,7 @@
             @endforeach
 
             <!-- Add pagination controls -->
-            <div class="col-12 mt-4">
-                {{ $events->links() }}
-            </div>
-        @else
+         
             <div class="col-12">
                 <p class="text-muted">No upcoming events available right now. Please check back later.</p>
             </div>

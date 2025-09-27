@@ -17,8 +17,15 @@ class EventController extends Controller
         ]);
     }
 
+    // Add this method to EventController
+public function home()
+{
+    $events = Event::orderBy('date', 'ASC')->limit(6)->get(); // Show few events on homepage
+    return view('components.splash', compact('events'));
+}
+
     // Display list of events
-    public function index()
+public function index()
     {
         $events = Event::orderBy('date', 'ASC')->paginate(4);
         return view('events.index', compact('events'));

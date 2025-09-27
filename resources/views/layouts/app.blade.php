@@ -242,17 +242,16 @@ body {
   <nav class=" navbar navbar-expand-lg 
         navbar-light bg-light fixed-top py-lg-0 ">
   
- 
-    <div><img src="/logo/aston.svg" class="img-circle" alt="Cinque Terre" width="200" height="120"></div>
-      <div class="col-2 pt-0">
-        
-
-
+  <a href="{{ route('welcome') }}">
+    <div> <img src="/logo/aston.svg" class="img-circle" alt="Aston University - Go to Homepage" width="200" height="120">></div>
+      <div class="col-2 pt-0"> </a>
+<!--<div>
+    <a href="{{ route('welcome') }}">
+        <img src="/logo/aston.svg" class="img-circle" alt="Aston University - Go to Homepage" width="200" height="120">
+    </a>
+</div>-->
       <!-- the cart function to count the number of booking in the booking list -->
-      
     
-      
-      
       </div>
    
 
@@ -262,14 +261,19 @@ body {
 
       
         <a class="blog-header-logo text-dark" href="{{ route('events.index')}} "> Aston Events</a>
+
+              <a class="blog-header-logo text-dark" href="{{ route('welcome')}} "> Aston Events</a>
       </div>
       
-      
+
+
+
       <div class="col- d-flex justify-content-end align-items-left">
         
         
       @include('components.search')
       @include('components.culture')
+   
       
 
  <!-- Right Side Of Navbar -->
@@ -329,25 +333,23 @@ body {
 
 <div class="nav-scroller py-2 mb-3">
 
-  <nav class="nav d-flex justify-content-between">
-
-  <strong><a class= "btn btn-secondary btn-lg" role="button" href="{{ url('/') }}">
-                    {{ config('app.Home', 'Home') }}
-                </a></strong>
-                <a class="p-2 text-muted" href="#"></a>
-
-  <strong><a class= "navbar-brand p-2 text-muted" href="{{ route('events.sport') }}">Sports</a></strong>
+<nav class="nav d-flex justify-content-between">
+    <strong><a class="btn {{ Route::currentRouteName() == 'welcome' ? 'btn-primary' : 'btn-secondary' }} btn-lg" role="button" href="{{ route('welcome') }}">
+        Home
+    </a></strong>
     <a class="p-2 text-muted" href="#"></a>
-    
 
+    <strong><a class="navbar-brand p-2 text-muted {{ Request::is('sport*') ? 'text-primary' : '' }}" href="{{ route('events.sport') }}">Sports</a></strong>
+    <a class="p-2 text-muted" href="#"></a>
 
-    <strong> <a class= "navbar-brand p-2 text-muted" href="{{ route('events.culture') }}">Culture</a></strong>
-    <a class="p-2 text-muted" ></a>
+    <strong><a class="navbar-brand p-2 text-muted {{ Request::is('culture*') ? 'text-primary' : '' }}" href="{{ route('events.culture') }}">Culture</a></strong>
+    <a class="p-2 text-muted"></a>
 
- <strong><a class= "navbar-brand p-2 text-muted"  href="{{ route('events.others') }}">Others</a></strong>
+    <strong><a class="navbar-brand p-2 text-muted {{ Request::is('others*') ? 'text-primary' : '' }}" href="{{ route('events.others') }}">Others</a></strong>
 
-    <strong><a class= "navbar-brand p-2 text-muted" href="{{ route('events.contact') }}">Contacts</a></strong>
-    <a class="p-2 text-muted" ></a>
+    <strong><a class="navbar-brand p-2 text-muted {{ Request::is('contact*') ? 'text-primary' : '' }}" href="{{ route('events.contact') }}">Contacts</a></strong>
+    <a class="p-2 text-muted"></a>
+</nav>
 
 
     
