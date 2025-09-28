@@ -89,3 +89,6 @@ Route::get('/', function () {
 // Events listing page - for browsing/booking events
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
+// Add Music events route if you want to implement it
+Route::get('/music', [EventController::class, 'music'])->name('events.music');
+

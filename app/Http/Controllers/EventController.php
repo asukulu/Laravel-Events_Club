@@ -62,6 +62,7 @@ public function index()
     public function sport()   { return $this->filterByCategory('sport'); }
     public function others()  { return $this->filterByCategory('others'); }
     public function contact() { return $this->filterByCategory('contact'); }
+    public function music()   { return $this->filterByCategory('music'); } // If you want to implement music category
 
     private function filterByCategory($category)
     {
