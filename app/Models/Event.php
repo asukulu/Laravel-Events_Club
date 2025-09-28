@@ -41,4 +41,15 @@ class Event extends Model
         //this is the relationship of user belongs to an event 
         return $this->belongsToMany(User::class);
     }
+
+    public function likes()
+{
+    return $this->hasMany(Like::class);
+}
+
+public function isLikedByUser($userId)
+{
+    return $this->likes()->where('user_id', $userId)->exists();
+}
+
 }

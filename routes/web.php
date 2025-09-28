@@ -8,6 +8,7 @@ use App\Models\Event;  // ← Add this line
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,4 +92,8 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
 // Add Music events route if you want to implement it
 Route::get('/music', [EventController::class, 'music'])->name('events.music');
+// Like/Unlike event route
+
+Route::post('/events/{event}/like', [LikeController::class, 'toggle'])->name('events.like');
+
 
