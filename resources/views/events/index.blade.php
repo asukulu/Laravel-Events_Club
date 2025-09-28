@@ -28,9 +28,22 @@
               @endif
             @endauth
           </div>
-          <div class="col-auto d-none d-lg-block">
+         <div class="col-auto d-none d-lg-block">
+    @if($event->image)
+        @if(str_starts_with($event->image, 'events/'))
+            {{-- Dynamic uploaded images --}}
             <img src="{{ asset('storage/' . $event->image) }}" class="img-rounded" alt="{{ $event->title }}" width="300" height="300">
-          </div>
+        @else
+            {{-- Static images from public/img --}}
+            <img src="{{ asset($event->image) }}" class="img-rounded" alt="{{ $event->title }}" width="300" height="300">
+        @endif
+    @else
+        {{-- No image placeholder --}}
+        <div class="bg-secondary d-flex align-items-center justify-content-center" style="width: 300px; height: 300px;">
+            <span class="text-white">No Image</span>
+        </div>
+    @endif
+</div>
         </div>
       </div>
     @endforeach
@@ -38,6 +51,7 @@
 
   @auth
     <a href="{{ route('events.create') }}" class="btn btn-primary">+ Add Event</a>
+    
   @endauth
 
   <div class="d-flex justify-content-center">

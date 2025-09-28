@@ -243,8 +243,10 @@ body {
         navbar-light bg-light fixed-top py-lg-0 ">
   
   <a href="{{ route('welcome') }}">
-    <div> <img src="/logo/aston.svg" class="img-circle" alt="Aston University - Go to Homepage" width="200" height="120">></div>
+    <div> <img src="/logo/nasevents-logo.svg" class="img-circle" alt="Nas Event - Go to Homepage" width="300" height="100"></div>
       <div class="col-2 pt-0"> </a>
+
+
 <!--<div>
     <a href="{{ route('welcome') }}">
         <img src="/logo/aston.svg" class="img-circle" alt="Aston University - Go to Homepage" width="200" height="120">
@@ -260,9 +262,9 @@ body {
       <div class="col-5 text-center">
 
       
-        <a class="blog-header-logo text-dark" href="{{ route('events.index')}} "> Aston Events</a>
+        <!--<a class="blog-header-logo text-dark" href="{{ route('events.index')}} "> Aston Events</a>-->
 
-              <a class="blog-header-logo text-dark" href="{{ route('welcome')}} "> Aston Events</a>
+              <a class="blog-header-logo text-dark" href="{{ route('welcome')}} "> Nas Events</a>
       </div>
       
 

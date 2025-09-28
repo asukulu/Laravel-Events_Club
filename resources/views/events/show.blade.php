@@ -61,6 +61,7 @@ body {
 
 <!-- this is to display the content of event table and add to the booking list  -->
 <form method="POST" action="{{ route('booking.store') }}">
+  
 @csrf
 
 <input type="hidden" name="id" value="{{ $event->id }}">

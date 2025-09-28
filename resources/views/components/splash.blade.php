@@ -57,9 +57,7 @@
 
             <!-- Add pagination controls -->
          
-            <div class="col-12">
-                <p class="text-muted">No upcoming events available right now. Please check back later.</p>
-            </div>
+           
         @endif
     </div>
 </div>

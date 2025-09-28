@@ -1,0 +1,31 @@
+
+<!-- save as "nasevents-logo.svg" -->
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="220" viewBox="0 0 780 220" role="img" aria-labelledby="title desc">
+  <title id="title">NASEVENTS Logo</title>
+  <desc id="desc">Stylized NASEVENTS wordmark with play and sparkle icons.</desc>
+
+  <defs>
+    <style>
+      .brand-main { fill: #0b67ff; }   /* bold blue */
+      .brand-text { fill: #2b2b2b; }   /* dark grey */
+      .accent     { fill: #ff4081; }   /* pink accent */
+      .sparkle    { fill: #ffbf00; }   /* gold accent */
+      .word-logo  { font: 700 54px/1 "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; letter-spacing: -1px; }
+    </style>
+  </defs>
+
+  <!-- transparent background -->
+  <rect width="100%" height="100%" fill="none"/>
+
+  <!-- icon: play + sparkle inside circle -->
+  <g transform="translate(40,50)">
+    <circle cx="60" cy="60" r="60" fill="#f0f7ff" stroke="#dbeafe" stroke-width="2"/>
+    <polygon points="52,40 90,60 52,80" class="accent"/>
+    <path d="M110 30 L116 46 L132 52 L116 58 L110 74 L104 58 L88 52 L104 46 Z" class="sparkle"/>
+  </g>
+
+  <!-- wordmark -->
+  <g transform="translate(220,120)">
+    <text x="0" y="0" class="word-logo brand-main">NASEVENTS</text>
+  </g>
+</svg>
