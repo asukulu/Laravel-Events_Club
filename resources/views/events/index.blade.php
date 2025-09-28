@@ -49,10 +49,10 @@
     @endforeach
   </div>
 
-  @auth
+  <!--@auth
     <a href="{{ route('events.create') }}" class="btn btn-primary">+ Add Event</a>
     
-  @endauth
+  @endauth -->
 
   <div class="d-flex justify-content-center">
     {{ $events->links() }}

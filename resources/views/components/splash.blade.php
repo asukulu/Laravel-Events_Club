@@ -11,10 +11,10 @@
             var images = [
                 '{{ asset("img/ka.jpg") }}',
                 '{{ asset("img/ru.jpg") }}',
-                '{{ asset("img/sp.jpg") }}',
+                '{{ asset("img/1 (12).jpg") }}',
                 '{{ asset("img/1 (5).jpg") }}',
-                '{{ asset("img/2 (2).jpg") }}',
                 '{{ asset("img/1 (2).jpg") }}'
+                
             ];
             var time = 4000;
             function changeImg() {

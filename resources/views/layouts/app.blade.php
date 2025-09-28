@@ -51,6 +51,23 @@
             padding: 1rem 0;
             margin-top: 2rem;
         }
+
+        /* Brand text (NAS EVENTS) */
+.blog-header-logo {
+  
+    font-size: 2rem;   /* Bigger size */
+    font-weight: 700;    /* Make it bold */
+    letter-spacing: 1px; /* Spacing for elegance */
+    color: #000;         /* Solid black */
+   
+
+}
+
+.blog-header-logo:hover {
+    text-decoration: none;
+    color: #0080ff; /* Highlight on hover */
+}
+
     </style>
 </head>
 
@@ -68,9 +85,12 @@
                     </a>
                     
                     <!-- Title -->
-                    <a class="navbar-brand text-dark fw-bold" href="{{ route('welcome') }}">
-                        Nas Events
+                    <!--<a class="navbar-brand text-dark fw-bold" href="{{ route('welcome') }}">
+                        Nas Events -->
                     </a>
+<a class="navbar-brand mx-auto blog-header-logo" href="{{ route('welcome') }}">
+    Nas Events
+</a>
                     
                     <!-- Mobile Toggle -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
