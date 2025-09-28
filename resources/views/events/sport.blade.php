@@ -22,6 +22,10 @@
         border: none;
         cursor: pointer;
     }
+
+
+
+    
 </style>
 
 @if($events->isEmpty())

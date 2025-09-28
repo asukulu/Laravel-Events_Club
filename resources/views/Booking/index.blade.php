@@ -10,27 +10,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
 
-body {
-
-
-  background: #e8efff;
-  display: flex;
-  width: 100%;
-  height: 100vh;
-}
-
-.like__btn {
-  padding: 5px 5px, 1px,5px;
-  background: #e8efff;
-  font-size: 18px;
-  font-family: "Open Sans", sans-serif;
-  border-radius: 0px;
-  color: black;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
-
 
 </style>
 
