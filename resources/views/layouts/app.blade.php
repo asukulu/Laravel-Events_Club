@@ -1119,6 +1119,7 @@
                         <!-- Search Bar -->
                         @include('components.search')
                         
+                        
                         <!-- Profile / Auth -->
                         <div class="ms-3">
                             @guest

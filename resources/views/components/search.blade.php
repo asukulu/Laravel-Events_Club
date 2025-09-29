@@ -20,10 +20,6 @@ placeholder="Enter keyword" />
 <button type="submit"  class="btn btn-info" > <i class="fa fa-search" aria-hidden="true" > </i></button>
 
   
-  
-
-
-
 
 </form>
 

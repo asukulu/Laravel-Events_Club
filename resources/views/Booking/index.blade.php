@@ -2,150 +2,176 @@
 
 @section('content')
 
-<!-- if the shooping list is not zero it will display the content. -->
 @if (Cart::count() > 0)
 
 
+
 <style>
+.booking-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 30px 20px;
+}
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+.booking-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    padding: 30px;
+    overflow: hidden;
+}
 
+.booking-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
+.table-modern {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-modern thead {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.table-modern th, .table-modern td {
+    padding: 18px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+.table-modern tbody tr {
+    border-bottom: 1px solid #f1f1f1;
+    transition: background 0.3s ease;
+}
+
+.table-modern tbody tr:hover {
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.table-modern img {
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.btn-delete {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(231,76,60,0.3);
+}
+
+.empty-message {
+    text-align: center;
+    margin-top: 80px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .table-modern thead {
+        display: none;
+    }
+
+    .table-modern, .table-modern tbody, .table-modern tr, .table-modern td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-modern tr {
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .table-modern td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    .table-modern td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 6px;
+        color: #667eea;
+    }
+    .table-modern td:last-child {
+        text-align: right;
+    }
+
+    
 </style>
 
-<div class="px-4 px-lg-0">
+<div class="booking-container">
+    <div class="booking-card">
+        <h2 class="booking-title">My Bookings</h2>
 
-  <div class="pb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-
-          <!-- Shopping cart table -->
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="p-2 px-3 text-uppercase">Events</div>
-                  </th>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Price</div>
-                  </th>
-
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Date</div>
-                  </th>
-
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Bookings </div>
-                  </th>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Remove</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-           @foreach (Cart::content() as $event)
-
-           
-           <tr>
-                  <th scope="row" class="border-0">
-                    <div class="p-2">
-                      <img src="{{ $event->model->image }}" alt="" width="70" class="img-fluid rounded shadow-sm">
-                      <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0"><a href="#" class="text-dark d-inline-block align-middle">{{ $event->model->title }} </a></h5><span class="text-muted font-weight-normal font-italic"></span>
-                      </div>
-                      
-                    </div>
-                  </th>
-            
-                  <td class="border-0 align-middle"><strong>{{ $event->model->getPrice() }}</strong></td>
-                  <td class="border-0 align-middle"><strong>{{ $event->model->date }}</strong></td>
-              
-                  <td class="border-0 align-middle"><strong>1</strong></td>
-                  <td class="border-0 align-middle">
-          
-                
-
-           
- <!-- this is to prompt the user if they want to delete or not.                -->
-<a class= "btn btn-dark p-1 text-white"href="#"
-onclick="
-
-var result = confirm('Do you wish to delete?');
-if( result ) {
-   event.preventDefault();
-   document.getElementById('delete-form').submit();
-
-}
-" 
->
-Delete 
-</a>
-
-                  <form id="delete-form" action="{{ route('booking.destroy' , $event->rowId) }}" method="POST" style="display:none;">
-                  <input type="hidden" name="_method" value="delete">
-                      @csrf
-
-                      @method('DELETE')
-
-                
-                  <button type="submit" class="text-dark"><i class="fa fa-trash"></i></a>
-                  </td>
-                </tr>
-                <tr>
-             
-                 
-                    </form>
-                    </td>
-                </tr>
-
-           @endforeach
-    
-              </tbody>
+        <div class="table-responsive">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <th>Bookings</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (Cart::content() as $event)
+                    <tr>
+                        <td data-label="Event">
+                            <div style="display:flex; align-items:center; gap:15px;">
+                                <img src="{{ $event->model->image }}" alt="{{ $event->model->title }}" width="70" height="70">
+                                <span style="font-weight:600;">{{ $event->model->title }}</span>
+                            </div>
+                        </td>
+                        <td data-label="Price"><strong>£{{ $event->model->getPrice() }}</strong></td>
+                        <td data-label="Date">{{ $event->model->date }}</td>
+                        <td data-label="Bookings">1</td>
+                        <td data-label="Remove">
+                            <form id="delete-form-{{ $event->rowId }}" action="{{ route('booking.destroy', $event->rowId) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-delete" onclick="return confirm('Do you want to remove this event?')">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
             </table>
-          </div>
-  <p> <div>
-          <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-              <!-- <ul><a> <button href="{{ route('events.index') }}"  class="btn btn- rounded-pill py-2 btn-block btn-success" id="submit">Book</button></a>
- -->
-              
-              <script> 
-              $(document).ready(function()
-              {
-                $("button").click(function()
-                {
-                  alert("Deleted!")
-                })
-              })
-
-           
-            </script>
-
-            
-@if (request()->input())
-<h4> {{ $events->total() }} result(s) for "{{ request()->search }} "</h4>
-@endif
-               </div>
-               </p>
-          </div>
         </div>
-      </div>
 
     </div>
-  </div>
 </div>
 @else
-<div class="col-md-12">
-<p> You booking list is empty</P>
-
+<div class="empty-message">
+    <p>Your booking list is empty.</p>
+    <a href="{{ route('events.index') }}" class="btn btn-primary mt-3">Browse Events</a>
 </div>
 @endif
 
-
-
-
 @endsection
-
-
