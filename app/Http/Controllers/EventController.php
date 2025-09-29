@@ -18,14 +18,14 @@ class EventController extends Controller
     }
 
     // Add this method to EventController
-public function home()
-{
-    $events = Event::orderBy('date', 'ASC')->limit(6)->get(); // Show few events on homepage
-    return view('components.splash', compact('events'));
-}
+    public function home()
+    {
+        $events = Event::orderBy('date', 'ASC')->limit(6)->get(); // Show few events on homepage
+        return view('components.splash', compact('events'));
+    }
 
     // Display list of events
-public function index()
+    public function index()
     {
         $events = Event::orderBy('date', 'ASC')->paginate(4);
         return view('events.index', compact('events'));
@@ -57,21 +57,31 @@ public function index()
         return view('events.search', compact('events'));
     }
 
-    // Filter by category
+    // Filter by category - FIXED VERSION
     public function culture() { return $this->filterByCategory('culture'); }
     public function sport()   { return $this->filterByCategory('sport'); }
     public function others()  { return $this->filterByCategory('others'); }
-    public function contact() { return $this->filterByCategory('contact'); }
-    public function music()   { return $this->filterByCategory('music'); } // If you want to implement music category
+    public function contact() { return view('events.contact'); }
+    
+    // Remove music() method unless you have music category in your database
 
     private function filterByCategory($category)
     {
         $search = request()->input('search', '');
-        $events = Event::where('name', 'like', "%$category%")
-            ->orWhere('title', 'like', "%$search%")
-            ->orWhere('organiser', 'like', "%$search%")
-            ->orWhere('description', 'like', "%$search%")
-            ->paginate(4);
+        
+        // First, filter by exact category match
+        $events = Event::where('name', $category);
+        
+        // Then, if there's a search term, apply additional search filters
+        if (!empty($search)) {
+            $events->where(function($query) use ($search) {
+                $query->where('title', 'like', "%$search%")
+                      ->orWhere('organiser', 'like', "%$search%")
+                      ->orWhere('description', 'like', "%$search%");
+            });
+        }
+        
+        $events = $events->orderBy('date', 'ASC')->paginate(4);
 
         return view("events.$category", compact('events'));
     }
@@ -83,36 +93,35 @@ public function index()
     }
 
     // Store new event
-   public function store(Request $request)
-{
-    $validated = $request->validate([
-        'title'       => 'required|string|max:255',
-        'name'        => 'required|string|max:255',
-        'slug'        => 'nullable|string|max:255|unique:events,slug',
-        'organiser'   => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'price'       => 'required|numeric|min:0',
-        'venue'       => 'required|string|max:255',
-        'date'        => 'required|date',
-        'time'        => 'required',
-        'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title'       => 'required|string|max:255',
+            'name'        => 'required|string|max:255',
+            'slug'        => 'nullable|string|max:255|unique:events,slug',
+            'organiser'   => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price'       => 'required|numeric|min:0',
+            'venue'       => 'required|string|max:255',
+            'date'        => 'required|date',
+            'time'        => 'required',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    // Auto-generate slug if empty
-    if (empty($validated['slug'])) {
-        $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']);
+        // Auto-generate slug if empty
+        if (empty($validated['slug'])) {
+            $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']);
+        }
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('events', 'public');
+        }
+
+        Event::create($validated);
+
+        return redirect()->route('events.index')->with('success', 'Event created successfully!');
     }
-
-    // Handle image upload
-    if ($request->hasFile('image')) {
-        $validated['image'] = $request->file('image')->store('events', 'public');
-    }
-
-    Event::create($validated);
-
-    return redirect()->route('events.index')->with('success', 'Event created successfully!');
-}
-
 
     // Show edit form
     public function edit(Event $event)
