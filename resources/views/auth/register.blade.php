@@ -8,24 +8,11 @@
 
 body {
 
-
-  background: #e8efff;
-  display: flex;
-  width: 100%;
-  height: 100vh;
+    background: #f0f2f5;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.like__btn {
-  padding: 5px 5px, 1px,5px;
-  background: #e8efff;
-  font-size: 18px;
-  font-family: "Open Sans", sans-serif;
-  border-radius: 0px;
-  color: black;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
+
 
 
 </style>
