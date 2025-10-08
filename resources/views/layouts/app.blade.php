@@ -1090,7 +1090,16 @@
 </head>
 
 <body>
-    <div class="container-fluid p-0">
+   <div class="container-fluid d-flex flex-column min-vh-100 p-0">
+
+        <!-- Header ... -->
+
+        <main class="container flex-grow-1">
+            @yield('content')
+        </main>
+
+       
+    </div>
 
         <!-- Modern Fixed Navigation Header -->
         <header class="fixed-top">
@@ -1279,7 +1288,7 @@
                 </div>
             @endif
 
-            @yield('content')
+           <!-- @yield('content') -->
         </main>
 
         <!-- Modern Footer -->

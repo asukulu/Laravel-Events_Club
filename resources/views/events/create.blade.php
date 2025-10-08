@@ -455,6 +455,7 @@ function updateFileName(input) {
     }
 }
 
+
 // Auto-generate slug from title
 document.getElementById('title').addEventListener('input', function(e) {
     const slugInput = document.getElementById('slug');
