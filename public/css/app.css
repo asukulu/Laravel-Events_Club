@@ -1039,6 +1039,272 @@ body {
 
 
 /* ===========================
+   Register form Page Styles
+   =========================== */
+/* ==============================
+   Registration Page Styles
+   ============================== */
+
+.register-container {
+    max-width: 550px;
+    margin: 80px auto;
+    padding: 20px;
+}
+
+.register-card {
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    padding: 50px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.register-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.register-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+}
+
+.register-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.register-subtitle {
+    font-size: 1rem;
+    color: #666;
+}
+
+.form-group-register {
+    margin-bottom: 25px;
+}
+
+.form-label-register {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-label-register i {
+    color: #667eea;
+    margin-right: 8px;
+    width: 16px;
+}
+
+.required-mark {
+    color: #e74c3c;
+    margin-left: 3px;
+}
+
+.form-control-register {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-control-register:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-control-register.is-invalid {
+    border-color: #e74c3c;
+}
+
+.invalid-feedback-register {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.password-strength {
+    margin-top: 8px;
+    font-size: 0.85rem;
+}
+
+.strength-bar {
+    height: 4px;
+    background: #e9ecef;
+    border-radius: 2px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.strength-weak { background: #e74c3c; width: 33%; }
+.strength-medium { background: #f39c12; width: 66%; }
+.strength-strong { background: #27ae60; width: 100%; }
+
+.form-help-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.register-actions {
+    margin-top: 35px;
+}
+
+.btn-register-submit {
+    width: 100%;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-register-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.login-section {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #e9ecef;
+}
+
+.login-text {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.btn-login-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 30px;
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-login-link:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.alert-register {
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-danger {
+    background: #fee;
+    color: #c33;
+    border-left: 4px solid #e74c3c;
+}
+
+.alert-success {
+    background: #efe;
+    color: #3c3;
+    border-left: 4px solid #28a745;
+}
+
+.alert-register i {
+    font-size: 1.2rem;
+}
+
+.terms-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}
+
+.terms-section a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.terms-section a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+    .register-container {
+        margin: 40px auto;
+    }
+    
+    .register-card {
+        padding: 40px 25px;
+    }
+    
+    .register-title {
+        font-size: 1.8rem;
+    }
+}
+
+
+
+
+
+
+/* ===========================
    Contact Page Styles
    =========================== */
 .contact-container {
@@ -1338,13 +1604,13 @@ body {
 
 .event-category {
     display: inline-block;
-    padding: 6px 15px;
-    border-radius: 20px;
+    padding: -10px 15px;
+    border-radius: -5px;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    margin-bottom: -1px;
 }
 
 .category-sports {
@@ -1366,8 +1632,8 @@ body {
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 8px;
-    line-height: 1.3;
+    margin-bottom: 7px;
+    line-height: 0.9;
 }
 
 .event-name {
@@ -1380,8 +1646,8 @@ body {
 .event-details-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
+    gap: 4px;
+    margin-bottom: 10px;
 }
 
 .event-detail-item {
@@ -1633,7 +1899,7 @@ body {
 }
 
 .search-event-content {
-    padding: 25px;
+    padding: 10px;
     flex: 1;
     display: flex;
     flex-direction: column;
