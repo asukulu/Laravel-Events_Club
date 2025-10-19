@@ -41,7 +41,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('index');
 
 // Events - Public Views
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
-Route::get('/welcome/{slug}', [EventController::class, 'show'])->name('events.show');
+//Route::get('/welcome/{slug}', [EventController::class, 'show'])->name('events.show');
+Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
 
 // Event Categories
 //Route::get('/culture', [EventController::class, 'culture'])->name('events.culture');

@@ -2,98 +2,168 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Event</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Edit Event: {{ $event->title }}</div>
 
-    {{-- Success/Error messages --}}
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+                <div class="card-body">
+                    <form method="POST" action="{{ route('events.update', $event) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+                        <div class="row mb-3">
+                            <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
+                            <div class="col-md-6">
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" 
+                                       name="title" value="{{ old('title', $event->title) }}" required>
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-    <form action="{{ route('events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" 
+                                       name="name" value="{{ old('name', $event->name) }}" required>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Title --}}
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title', $event->title) }}" required>
-        </div>
+                        <div class="row mb-3">
+                            <label for="slug" class="col-md-4 col-form-label text-md-end">{{ __('Slug') }}</label>
+                            <div class="col-md-6">
+                                <input id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" 
+                                       name="slug" value="{{ old('slug', $event->slug) }}" placeholder="Leave empty to auto-generate">
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Name / Category --}}
-        <div class="form-group">
-            <label>Name (Category)</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name', $event->name) }}" required>
-        </div>
+                        <div class="row mb-3">
+                            <label for="organiser" class="col-md-4 col-form-label text-md-end">{{ __('Organiser') }}</label>
+                            <div class="col-md-6">
+                                <input id="organiser" type="text" class="form-control @error('organiser') is-invalid @enderror" 
+                                       name="organiser" value="{{ old('organiser', $event->organiser) }}" required>
+                                @error('organiser')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Slug --}}
-        <div class="form-group">
-            <label>Slug</label>
-            <input type="text" name="slug" class="form-control" value="{{ old('slug', $event->slug) }}" required>
-        </div>
+                        <div class="row mb-3">
+                            <label for="venue" class="col-md-4 col-form-label text-md-end">{{ __('Venue') }}</label>
+                            <div class="col-md-6">
+                                <input id="venue" type="text" class="form-control @error('venue') is-invalid @enderror" 
+                                       name="venue" value="{{ old('venue', $event->venue) }}" required>
+                                @error('venue')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Organiser --}}
-        <div class="form-group">
-            <label>Organiser</label>
-            <input type="text" name="organiser" class="form-control" value="{{ old('organiser', $event->organiser) }}" required>
-        </div>
+                        <div class="row mb-3">
+                            <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Date') }}</label>
+                            <div class="col-md-6">
+                                <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" 
+                                       name="date" value="{{ old('date', $event->date) }}" required>
+                                @error('date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Description --}}
-        <div class="form-group">
-            <label>Description</label>
-            <textarea name="description" class="form-control" required>{{ old('description', $event->description) }}</textarea>
-        </div>
+                        <div class="row mb-3">
+                            <label for="time" class="col-md-4 col-form-label text-md-end">{{ __('Time') }}</label>
+                            <div class="col-md-6">
+                                <input id="time" type="time" class="form-control @error('time') is-invalid @enderror" 
+                                       name="time" value="{{ old('time', $event->time) }}" required>
+                                @error('time')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Price --}}
-        <div class="form-group">
-            <label>Price (£)</label>
-            <input type="number" name="price" class="form-control" value="{{ old('price', $event->price) }}" min="0" step="0.01" required>
-        </div>
+                        <div class="row mb-3">
+                            <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('Price') }}</label>
+                            <div class="col-md-6">
+                                <input id="price" type="number" step="0.01" min="0" 
+                                       class="form-control @error('price') is-invalid @enderror" 
+                                       name="price" value="{{ old('price', $event->price) }}" required>
+                                @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Venue --}}
-        <div class="form-group">
-            <label>Venue</label>
-            <input type="text" name="venue" class="form-control" value="{{ old('venue', $event->venue) }}" required>
-        </div>
+                        <div class="row mb-3">
+                            <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" 
+                                          name="description" rows="4">{{ old('description', $event->description) }}</textarea>
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Date --}}
-        <div class="form-group">
-            <label>Date</label>
-            <input type="date" name="date" class="form-control" value="{{ old('date', $event->date) }}" required>
-        </div>
+                        <div class="row mb-3">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Event Image') }}</label>
+                            <div class="col-md-6">
+                                @if($event->image)
+                                    <div class="mb-2">
+                                        <img src="{{ asset('storage/' . $event->image) }}" alt="Current image" style="max-width: 200px; height: auto;">
+                                        <p class="small text-muted">Current image</p>
+                                    </div>
+                                @endif
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" 
+                                       name="image" accept="image/*">
+                                <small class="text-muted">Leave empty to keep current image</small>
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-        {{-- Time --}}
-        <div class="form-group">
-            <label>Time</label>
-            <input type="time" name="time" class="form-control" value="{{ old('time', $event->time) }}" required>
-        </div>
-
-        {{-- Image --}}
-        <div class="form-group">
-            <label>Image</label>
-
-            {{-- Current image preview --}}
-            @if($event->image)
-                <div class="mb-2">
-                    <p>Current Image:</p>
-                    <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" width="150">
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Update Event') }}
+                                </button>
+                                <a href="{{ route('events.index') }}" class="btn btn-secondary">
+                                    {{ __('Cancel') }}
+                                </a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            @endif
-
-            {{-- Upload new image --}}
-            <input type="file" name="image" class="form-control">
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-success">Update Event</button>
-    </form>
+    </div>
 </div>
 @endsection
