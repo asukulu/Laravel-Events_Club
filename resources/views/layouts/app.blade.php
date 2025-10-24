@@ -132,6 +132,7 @@
                                     <li><a class="dropdown-item modern-dropdown-item" href="{{ route('events.index') }}">
                                         <i class="fas fa-list me-2"></i>All Events
                                     </a></li>
+                
                                     <li><hr class="modern-dropdown-divider"></li>
                                     <li><a class="dropdown-item modern-dropdown-item" href="{{ route('events.sport') }}">
                                         <i class="fas fa-running me-2"></i>Sports

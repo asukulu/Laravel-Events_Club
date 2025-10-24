@@ -2,25 +2,12 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\HomeController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\LikeController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // ----------------------
 // Authentication Routes
@@ -41,16 +28,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('index');
 
 // Events - Public Views
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
-//Route::get('/welcome/{slug}', [EventController::class, 'show'])->name('events.show');
-Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
 
-// Event Categories
-//Route::get('/culture', [EventController::class, 'culture'])->name('events.culture');
+// Event Categories (MUST come before /events/{slug} to avoid conflicts)
 Route::get('/events/culture', [EventController::class, 'culture'])->name('events.culture');
-
 Route::get('/sport', [EventController::class, 'sport'])->name('events.sport');
 Route::get('/others', [EventController::class, 'others'])->name('events.others');
-Route::get('/music', [EventController::class, 'music'])->name('events.music');
 
 // Search & Contact
 Route::get('/search', [EventController::class, 'search'])->name('events.search');
@@ -64,8 +46,13 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
 // ----------------------
 Route::middleware(['auth'])->group(function () {
     
-    // Event Management (CRUD operations)
-    Route::resource('events', EventController::class)->except(['index', 'show']);
+    // Event Management (CRUD operations) - Specific routes BEFORE show route
+    Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::patch('/events/{event}', [EventController::class, 'update']);
+    Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     
     // Booking System
     Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
@@ -76,9 +63,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/events/{event}/like', [LikeController::class, 'toggle'])->name('events.like');
 });
 
+// Show single event - MUST be LAST to avoid catching other /events/* routes
+Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
+
 // ----------------------
 // Admin Routes
 // ----------------------
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('events', App\Http\Controllers\Admin\EventController::class);
+    Route::get('/events', function() {
+        $events = Event::orderBy('date', 'DESC')->paginate(15);
+        return view('admin.events.index', compact('events'));
+    })->name('events.index');
 });

@@ -1,6 +1,77 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+.event-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: visible !important;
+}
+
+.event-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-bottom: 60px; /* Space for buttons */
+}
+
+.event-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.event-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-view {
+    background: #6366f1;
+    color: white;
+}
+
+.btn-view:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+.btn-edit {
+    background: #fbbf24;
+    color: #1f2937;
+}
+
+.btn-edit:hover {
+    background: #f59e0b;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+}
+
+.event-actions form {
+    margin: 0;
+    display: inline-block;
+}
+</style>
+
 <div class="events-index-container">
     <!-- Page Header -->
     <div class="page-header-section">
@@ -47,7 +118,7 @@
                     <div class="event-content">
                         <div>
                             <span class="event-category category-{{ strtolower($event->name ?? 'others') }}">
-                                {{ ucfirst($event->name) ?? 'Event' }}
+                                {{ strtoupper($event->name) ?? 'EVENT' }}
                             </span>
                             
                             <h3 class="event-title">{{ $event->title }}</h3>
@@ -59,7 +130,7 @@
                                 </div>
                                 <div class="event-detail-item">
                                     <i class="fas fa-clock"></i>
-                                    <span>{{ $event->time }}</span>
+                                    <span>{{ \Carbon\Carbon::parse($event->time)->format('H:i') }}</span>
                                 </div>
                                 <div class="event-detail-item">
                                     <i class="fas fa-map-marker-alt"></i>
@@ -74,10 +145,24 @@
                             <div class="event-price">£{{ number_format($event->price, 2) }}</div>
                         </div>
                         
+                        <!-- Action Buttons -->
                         <div class="event-actions">
                             <a href="{{ route('events.show', $event->slug) }}" class="event-btn btn-view">
-                                <i class="fas fa-eye"></i> View Details
+                                <i class="fas fa-eye"></i> View
                             </a>
+                            
+                            <a href="{{ route('events.edit', $event) }}" class="event-btn btn-edit">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            
+                            <form action="{{ route('events.destroy', $event) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="event-btn btn-delete" 
+                                        onclick="return confirm('Delete {{ $event->title }}?')">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -98,11 +183,9 @@
             <p class="empty-state-text">
                 There are currently no events available. Check back soon or create your first event!
             </p>
-            @auth
-                <a href="{{ route('events.create') }}" class="add-event-btn">
-                    <i class="fas fa-plus"></i> Create New Event
-                </a>
-            @endauth
+            <a href="{{ route('events.create') }}" class="add-event-btn">
+                <i class="fas fa-plus"></i> Create New Event
+            </a>
         </div>
     @endif
 </div>

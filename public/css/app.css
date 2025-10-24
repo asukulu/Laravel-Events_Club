@@ -9968,8 +9968,78 @@ h3 {
   }
 }
 
+   /* ===========================
+   all Events CSS Variables end
+   =========================== */
 
+.event-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: visible !important;
+}
 
+.event-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-bottom: 60px; /* Space for buttons */
+}
+
+.event-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.event-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-view {
+    background: #6366f1;
+    color: white;
+}
+
+.btn-view:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+.btn-edit {
+    background: #fbbf24;
+    color: #1f2937;
+}
+
+.btn-edit:hover {
+    background: #f59e0b;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+}
+
+.event-actions form {
+    margin: 0;
+    display: inline-block;
+}
 
 
 
