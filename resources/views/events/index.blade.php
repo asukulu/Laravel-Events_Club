@@ -2,37 +2,193 @@
 
 @section('content')
 <style>
-.event-item {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: visible !important;
+.events-index-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
+.page-header-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+.page-description {
+    font-size: 1.1rem;
+    color: #6b7280;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.filter-section {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    background: white;
+    color: #4b5563;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+}
+
+/* 2-Column Grid Layout */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.event-item {
+    display: flex;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Image on Left */
+.event-image-container {
+    width: 180px;
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-image-container img,
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+}
+
+.no-image-placeholder i {
+    font-size: 2.5rem;
+}
+
+/* Content on Right */
 .event-content {
+    flex: 1;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    flex: 1;
-    padding-bottom: 60px; /* Space for buttons */
+}
+
+.event-category {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    width: fit-content;
+}
+
+.category-sport {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.category-culture {
+    background: #fce7f3;
+    color: #be185d;
+}
+
+.category-others {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.event-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.event-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.event-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.event-detail-item i {
+    width: 14px;
+    color: #6366f1;
+    font-size: 0.8rem;
+}
+
+.event-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #059669;
+    margin-bottom: 12px;
 }
 
 .event-actions {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     flex-wrap: wrap;
     margin-top: auto;
-    padding-top: 12px;
 }
 
 .event-btn {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     transition: all 0.3s;
     border: none;
     cursor: pointer;
@@ -69,6 +225,72 @@
 .event-actions form {
     margin: 0;
     display: inline-block;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    grid-column: 1 / -1;
+}
+
+.empty-state-icon i {
+    font-size: 4rem;
+    color: #d1d5db;
+    margin-bottom: 20px;
+}
+
+.empty-state-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 12px;
+}
+
+.empty-state-text {
+    color: #9ca3af;
+    margin-bottom: 24px;
+}
+
+.add-event-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #6366f1;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.add-event-btn:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .event-item {
+        flex-direction: column;
+    }
+    
+    .event-image-container {
+        width: 100%;
+        height: 200px;
+    }
 }
 </style>
 
